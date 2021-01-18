@@ -1,0 +1,38 @@
+<form class='am-form' method="POST">
+
+
+
+
+
+    {% csrf_token %}
+    {{ form.non_field_errors}}
+
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <fieldset>
+        {% for field in form %}
+            <div class='form-group'> 
+                {{field.errors}}
+                {{field.lable_tag}}
+                {{ field }}
+
+                {% if field.help_text %} 
+                <p class='help'>
+
+                    {{field.help_text| safe}}
+                </p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" >提交</button>   
+    </fieldset>
+</form>
+
